@@ -5,6 +5,9 @@ user=$USER
 firefox_path=$(which firefox)
 nom_term="Langue"
 
+echo -e "Création du raccourci.\n"
+sleep 1
+
 #Création du .desktop
 echo "[Desktop Entry]" > /home/${user}/Desktop/Langue.desktop
 echo "Encoding=UTF-8" >> /home/${user}/Desktop/Langue.desktop
@@ -21,6 +24,7 @@ chmod a+rx /home/${user}/Desktop/Langue.desktop
 sudo chmod 755 /home/${user}/Desktop/Langue.desktop
 gio set /home/${user}/Desktop/Langue.desktop metadata::trusted true
 
+echo -e "\033[32m\033[1m✔  Raccourci installé ! \033[0m\033[0m"
 
 # On renome le terminal
 echo -e "Vérification des logiciels et packages.\n"
@@ -35,28 +39,18 @@ if ! dpkg-query -W -f='${Status}' mysql-server 2>/dev/null | grep -q "ok install
   echo -e "\033[32m\033[1m✔  MySQL installé ! \033[0m\033[0m"
   mysql_version=$(mysql --version)
   echo "      Version : ${mysql_version}"
-  echo "Paramétrer MYSQL"
-  mysql_secure_installation 
-  echo "Entrer votre mot de passe utilisateur MySQL :"
-  read -s mdp_mysql
-  
-  # Démarrage de mysql pour créer un utilisateur
-  if (mysql -u root -p${mdp_mysql} -e "SELECT User FROM mysql.user WHERE User='langue'@'localhost';" | grep "'langue'@'localhost'" > /dev/null)
-  then
-     echo "L'utilisateur est prêt"
-     else
-     echo "Création de l'utilisateur:"
-     pass= $("blondinChad")
-     sudo mysql -u root -e "CREATE user 'langue'@'localhost' Identified by 'blondinChad';"
-     sudo mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'langue'@'localhost';"
-     fi
-  
 else
   echo -e "\033[32m\033[1m✔  MySQL installé ! \033[0m\033[0m"
-  mysql_version=$(mysql --version)
-  echo "      Version : ${mysql_version}"
-  sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS langue_anglais;"
 fi
+
+sleep 1
+
+# Création de l'utilisateur langue
+echo "Création de l'utilisateur:"
+sudo mysql -u root -e "CREATE user 'langue'@'localhost' Identified by 'blondinChad1#';"
+sudo mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'langue'@'localhost';"
+echo -e "\033[32m\033[1m✔  Utilisateur crée ! \033[0m\033[0m"
+sleep 1
 
 # Pour apache2
 if ! dpkg-query -W -f='${Status}' apache2 2>/dev/null | grep -q "ok installed"; then
@@ -78,6 +72,7 @@ else
   echo -e "      \033[33mConfiguration actuelle du par feu :\033[0m"
   sudo ufw status
 fi
+sleep 2
 vm="/etc/apache2/apache2.conf"
 
 # Si on ne l'a pas déjà ajouter
@@ -113,14 +108,17 @@ if grep -q -v "DocumentRoot /home/raphael/Desktop/Langue/www" /etc/apache2/apach
   sudo systemctl reload apache2
 fi
 
+sleep 2
+
 #Création du launcher
+echo -e "Création du launcher: \n"
 echo "sudo systemctl start mysql" > ${current_directory}/langue.sh
 echo "sudo systemctl start apache2" >> ${current_directory}/langue.sh
 echo "firefox -new-window http://langue.ms" >> ${current_directory}/langue.sh
-
+echo -e "\033[32m\033[1m✔  Raccourci créé ! \033[0m\033[0m \n"
+echo -e "\033[32m\033[1mInstallation terminée ! \033[0m\033[0m"
 sh langue.sh
 sleep 2
 exit
-
 
 
