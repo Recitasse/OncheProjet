@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'langue', 'blondinChad', 'langue_anglais');
+$conn = new mysqli('localhost', 'langue', 'blondinChad1#', 'langue_anglais');
 
 if (mysqli_connect_error()) {
     die("Connexion échouée: " . mysqli_connect_error());
