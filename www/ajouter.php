@@ -30,12 +30,11 @@ if(isset($_POST) && !empty($_POST) && isset($_GET) && !empty($_GET))
       }
 
    }
-}
-elseif($_GET['submit'] == 'Modifier')
-{
-      $sql = "UPDATE mot SET mot_mot=?, mot_traduction=?, mot_detail=?, langue=? WHERE mot_id=?";
+ if($_GET['submit'] == 'Modifier')
+ {
+      $sql = "UPDATE mot SET mot_mot=?, mot_traduction=?, mot_detail=? WHERE mot_id=?";
       $stmt = mysqli_prepare($conn, $sql);
-      mysqli_stmt_bind_param($stmt, "ssssi", $_POST['mot'], $_POST['trad'], $_POST['details'],$_POST['langue'], $_GET['id']);
+      mysqli_stmt_bind_param($stmt, "sssi", $_POST['mot'], $_POST['trad'], $_POST['details'], $_GET['id']);
 
       if(!mysqli_stmt_execute($stmt))
       {
@@ -48,7 +47,7 @@ elseif($_GET['submit'] == 'Modifier')
         header('location: index.php?re=bd');
         exit();
       }
-
+ }
 }
 
 ?>
