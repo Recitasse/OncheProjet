@@ -76,7 +76,7 @@ sleep 2
 vm="/etc/apache2/apache2.conf"
 
 # Si on ne l'a pas déjà ajouter
-if grep -q -v "DocumentRoot /home/raphael/Desktop/Langue/www" /etc/apache2/apache2.conf; then
+if grep -q -v "DocumentRoot /home/${user}/Desktop/Langue/www" /etc/apache2/apache2.conf; then
    # on regarde le dns et l'ip du site
    DNS="/etc/hosts"
    dns_nom="langue.apprendre"
