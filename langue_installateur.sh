@@ -2,27 +2,28 @@
 
 current_directory=$(pwd)
 user=$USER
-firefox_path=$(which firefox)
 nom_term="Langue"
 
 echo -e "Création du raccourci.\n"
 sleep 1
 
 #Création du .desktop
-echo "[Desktop Entry]" > /home/${user}/Desktop/Langue.desktop
-echo "Encoding=UTF-8" >> /home/${user}/Desktop/Langue.desktop
-echo "Version=1.0" >> /home/${user}/Desktop/Langue.desktop
-echo "Type=Application" >> /home/${user}/Desktop/Langue.desktop
-echo "Terminal=true" >> /home/${user}/Desktop/Langue.desktop
-echo "Exec=gnome-terminal --title '${USER}-${nom_term}' --command 'bash -c ${current_directory}/langue.sh'" >> /home/${user}/Desktop/Langue.desktop
-echo "Name=Langue" >> /home/${user}/Desktop/Langue.desktop
-echo "Icon=${current_directory}/www/anglais.png" >> /home/${user}/Desktop/Langue.desktop
-echo "Categories=Application" >> /home/${user}/Desktop/Langue.desktop
-echo "Comment=Application permettant de contrôler le drone" >> /home/${user}/Desktop/Langue.desktop
+{
+echo "[Desktop Entry]"
+echo "Encoding=UTF-8"
+echo "Version=1.0"
+echo "Type=Application"
+echo "Terminal=true"
+echo "Exec=gnome-terminal --title '${user}-${nom_term}' --command 'bash -c ${current_directory}/langue.sh'"
+echo "Name=Langue"
+echo "Icon=${current_directory}/www/anglais.png"
+echo "Categories=Application"
+echo "Comment=Application permettant de contrôler le drone"
+} >> /home/"${user}"/Desktop/Langue.desktop
 
-chmod a+rx /home/${user}/Desktop/Langue.desktop
-sudo chmod 755 /home/${user}/Desktop/Langue.desktop
-gio set /home/${user}/Desktop/Langue.desktop metadata::trusted true
+chmod a+rx /home/"${user}"/Desktop/Langue.desktop
+sudo chmod 755 /home/"${user}"/Desktop/Langue.desktop
+gio set /home/"${user}"/Desktop/Langue.desktop metadata::trusted true
 
 echo -e "\033[32m\033[1m✔  Raccourci installé ! \033[0m\033[0m"
 
@@ -82,14 +83,14 @@ if grep -q -v "DocumentRoot /home/${user}/Desktop/Langue/www" /etc/apache2/apach
    dns_nom="langue.apprendre"
    dns_val="127.1.1.20"
    if ! grep -q "${dns_nom}" "${DNS}"; then
-     sudo sh -c "echo '"${dns_val}	${dns_nom}" >> "${DNS}"'"
+     sudo sh -c "echo '${dns_val}	${dns_nom} >> ${DNS}'"
    fi
    # On l'ajoute à la configuration d'apache
 
    # Autorisation d'accès à ce seul pc.
    ip=$(hostname -I | cut -c 1-12)
 
-   if ! grep -q "SeverName ${vm_ip}" "${vm}"; then
+   if ! grep -q "SeverName 127.1.0.5 ${vm}"; then
      sudo bash -c "echo '# Server langue' >> '${vm}'"
      sudo bash -c "echo '<VirtualHost ${dns_val}:80>' >> '${vm}'"
      sudo bash -c "echo '   ServerName langue.ms' >> '${vm}'"
@@ -112,13 +113,11 @@ sleep 2
 
 #Création du launcher
 echo -e "Création du launcher: \n"
-echo "sudo systemctl start mysql" > ${current_directory}/langue.sh
-echo "sudo systemctl start apache2" >> ${current_directory}/langue.sh
-echo "firefox -new-window http://langue.ms" >> ${current_directory}/langue.sh
+echo "sudo systemctl start mysql" > "${current_directory}"/langue.sh
+echo "sudo systemctl start apache2" >> "${current_directory}"/langue.sh
+echo "firefox -new-window http://langue.ms" >> "${current_directory}"/langue.sh
 echo -e "\033[32m\033[1m✔  Raccourci créé ! \033[0m\033[0m \n"
 echo -e "\033[32m\033[1mInstallation terminée ! \033[0m\033[0m"
 sh langue.sh
 sleep 2
 exit
-
-
