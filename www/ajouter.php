@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 include "Includes/mdb.php";
 include "Includes/fonction.php";
 header('Content-Type: text/html; charset=utf-8');
-
+echo var_dump($_POST);
 if(isset($_POST) && !empty($_POST) && isset($_GET) && !empty($_GET))
 {
   
@@ -47,6 +47,7 @@ if(isset($_POST) && !empty($_POST) && isset($_GET) && !empty($_GET))
         header('location: index.php?re=bd');
         exit();
       }
+
  }
 }
 

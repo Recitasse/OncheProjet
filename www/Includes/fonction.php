@@ -236,7 +236,7 @@ function Afficher2($lim,$select,$lang, $date)
       }
    }
    
-   
+   $i = 1;
    if(!empty(mysqli_query($conn, $sql)))
    {
       $result = mysqli_query($conn, $sql);
@@ -246,11 +246,12 @@ function Afficher2($lim,$select,$lang, $date)
          while($l = mysqli_fetch_assoc($result))
          {
              echo "<tr>";
-             echo "<td>".$l['mot_id']."</td>";
+             echo "<td>".$i."</td>";
              echo "<td>".$l['mot_mot']."</td>";
              echo "<td class='devoil' style='background-color: rgba(255, 126, 0, 0.5);'>".$l['mot_traduction']."</td>";
              echo "<td>".$l['mot_detail']."</td>";
              echo "</tr>";
+             $i+=1;
          }
       }
       
@@ -259,11 +260,12 @@ function Afficher2($lim,$select,$lang, $date)
          while($l = mysqli_fetch_assoc($result))
          {
              echo "<tr>";
-             echo "<td>".$l['mot_id']."</td>";
+             echo "<td>".$i."</td>";
              echo "<td class='devoil' style='background-color: rgba(255, 126, 0, 0.5);'>".$l['mot_mot']."</td>";
              echo "<td>".$l['mot_traduction']."</td>";
              echo "<td>".$l['mot_detail']."</td>";
              echo "</tr>";
+             $i+=1;
          }
       }
       
@@ -272,11 +274,12 @@ function Afficher2($lim,$select,$lang, $date)
          while($l = mysqli_fetch_assoc($result))
          {
              echo "<tr>";
-             echo "<td>".$l['mot_id']."</td>";
+             echo "<td>".$i."</td>";
              echo "<td>".$l['mot_mot']."</td>";
              echo "<td>".$l['mot_traduction']."</td>";
              echo "<td class='devoil' style='background-color: rgba(255, 126, 0, 0.5);'>".$l['mot_detail']."</td>";
              echo "</tr>";
+             $i+=1;
          }
       }
       elseif($select == 3)
@@ -284,11 +287,12 @@ function Afficher2($lim,$select,$lang, $date)
          while($l = mysqli_fetch_assoc($result))
          {
              echo "<tr>";
-             echo "<td>".$l['mot_id']."</td>";
+             echo "<td>".$i."</td>";
              echo "<td>".$l['mot_mot']."</td>";
              echo "<td class='devoil' style='background-color: rgba(255, 126, 0, 0.5);'>".$l['mot_traduction']."</td>";
              echo "<td class='devoil' style='background-color: rgba(255, 126, 0, 0.5);'>".$l['mot_detail']."</td>";
              echo "</tr>";
+             $i+=1;
          }
       }
       elseif($select == 4 || $select == 0)
@@ -296,7 +300,7 @@ function Afficher2($lim,$select,$lang, $date)
          while($l = mysqli_fetch_assoc($result))
          {
              echo "<tr>";
-             echo "<td>".$l['mot_id']."</td>";
+             echo "<td>".$i."</td>";
              
              $val = array(mt_rand(0,1), mt_rand(0,1), mt_rand(0,1));
              $cond = array_sum($val);
@@ -327,7 +331,7 @@ function Afficher2($lim,$select,$lang, $date)
              {
                 echo "<td class='devoil' style='background-color: rgba(255, 126, 0, 0.5);'>".$l['mot_detail']."</td>";
              }
-             
+             $i+=1;
 
              echo "</tr>";
          }

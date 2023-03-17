@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include "Includes/mdb.php";
 include "Includes/fonction.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -33,3 +32,4 @@ include "Includes/fonction.php";
 </div>
 </body>
 </html>
+

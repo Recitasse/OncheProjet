@@ -340,6 +340,42 @@ footer button {
   width: 99%;
 }
 
+div.trad-cont {
+  border: 2px solid #0041b8;
+  box-shadow: 
+    0 0 4px 2px rgba(0, 0, 0, 0.1),
+    2px 2px 4px 2px rgba(0, 0, 0, 0.1),
+    -2px -2px 4px 2px rgba(0, 0, 0, 0.1),
+    2px -2px 4px 2px rgba(0, 0, 0, 0.1),
+    -2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(247, 247, 247, 0.5);
+}
+
+h4 {
+  color: rgba(27, 106, 250, 1);
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0;
+  margin-left: 15px;
+}
+
+section.case-trad {
+   background: rgba(255, 126, 0, 0.2);
+   border-bottom: 2px solid rgba(27, 106, 250, 0.8);
+   border-left: 2px solid rgba(27, 106, 250, 0.8);
+   border-radius: 10px;
+   padding: 5px;
+   margin-bottom: 10px;
+}
+
+
+div.trad-div {
+  margin-left: 40px;
+  margin-bottom: 5px;
+}
+
 @media only screen and (max-width: 600px)
 {
 
